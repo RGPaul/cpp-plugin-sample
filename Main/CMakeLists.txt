@@ -40,13 +40,23 @@ endif()
 # setup clang compiler options
 if((CMAKE_CXX_COMPILER_ID MATCHES "Clang"))
   message("Setting clang options")
-  set (CMAKE_CXX_FLAGS "-std=c++17 -stdlib=libc++")
+#  set (CMAKE_CXX_FLAGS "-std=c++17 -stdlib=libc++")
 endif()
+
+### link external libraries ###
+
+# Boost - https://www.boost.org
+find_package(Boost COMPONENTS filesystem log system)
 
 ### create executable ###
 add_executable(myapp
                src/main.cpp
                src/Plugin.cpp)
+
+### link libraries ###
+# target_link_directories(myapp PUBLIC ${Boost_INCLUDE_DIRS})
+include_directories(${Boost_INCLUDE_DIRS})
+link_directories(${Boost_LIBRARY_DIRS})
 
 # for Linux, BSD, Solaris, Minix - add posix thread library
 if(UNIX AND NOT APPLE)

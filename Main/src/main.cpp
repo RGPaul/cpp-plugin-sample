@@ -7,9 +7,16 @@
 
 #include <cstdlib>
 
+#include <boost/filesystem.hpp>
+#include <boost/log/trivial.hpp>
+
+#include "Plugin.hpp"
+
 int main(const int argc, const char** argv)
 {
-    
+    boost::filesystem::path libraryPath = "";
+
+
     
     return EXIT_SUCCESS;
 }

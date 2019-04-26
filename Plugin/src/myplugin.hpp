@@ -9,9 +9,9 @@
 
 // on windows we need exports for creating the dll
 #if defined(_WIN32)
-    #define DLL_EXPORT __declspec(dllexport)
-#else // defined (_WIN32)
- #define DLL_EXPORT
+  #define DLL_EXPORT __declspec(dllexport)
+#else // defined(_WIN32)
+  #define DLL_EXPORT
 #endif
 
 namespace appcom
