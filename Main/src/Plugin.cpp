@@ -10,7 +10,7 @@
 appcom::Plugin::Plugin(std::string fileName)
 {
 #if defined(_WIN32)
-  
+
     _lib = LoadLibrary(fileName.to_wstring().c_str());
 
     if (!_lib)
@@ -28,7 +28,7 @@ appcom::Plugin::Plugin(std::string fileName)
     if (!_onUnload)
         throw "Couldn't found onUnload in Plugin.";
 
-#else // defined(_WIN32)
+#else  // defined(_WIN32)
 
     _lib = dlopen(fileName.c_str(), RTLD_LAZY);
 
@@ -54,7 +54,7 @@ appcom::Plugin::Plugin(std::string fileName)
 
 #endif
 }
-    
+
 appcom::Plugin::~Plugin()
 {
 #if defined(_WIN32)
@@ -62,7 +62,7 @@ appcom::Plugin::~Plugin()
     if (_lib)
         FreeLibrary(_lib);
 
-#else // defined(_WIN32)
+#else  // defined(_WIN32)
 
     if (_lib)
         dlclose(_lib);

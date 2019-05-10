@@ -10,21 +10,21 @@
 #include <string>
 
 #if defined(_WIN32)
-  #include <Windows.h>
-#else // defined(_WIN32)
-  #include <dlfcn.h>
+#include <Windows.h>
+#else  // defined(_WIN32)
+#include <dlfcn.h>
 #endif
 
 namespace appcom
 {
 class Plugin
 {
-private:
-    typedef const char*(*getNameType)();
-    typedef void(*onLoadType)();
-    typedef void(*onUnloadType)();
+  private:
+    typedef const char *(*getNameType)();
+    typedef void (*onLoadType)();
+    typedef void (*onUnloadType)();
 
-public:
+  public:
     explicit Plugin(std::string fileName);
     ~Plugin();
 
@@ -33,7 +33,7 @@ public:
     onLoadType onLoad() const;
     onUnloadType onUnload() const;
 
-private:
+  private:
     Plugin() = delete;
     Plugin(const Plugin &other) = delete;
 
@@ -43,8 +43,8 @@ private:
 
 #if defined(_WIN32)
     HINSTANCE _lib;
-#else // defined(_WIN32)
-    void* _lib;
+#else  // defined(_WIN32)
+    void *_lib;
 #endif
 };
-} // namespace appcom
+}  // namespace appcom

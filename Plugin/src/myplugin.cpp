@@ -9,17 +9,8 @@
 
 #include <iostream>
 
-const char* appcom::plugin::getName()
-{
-    return "Sample Plugin";
-}
+const char* appcom::plugin::getName() { return "Sample Plugin"; }
 
-void appcom::plugin::onLoad()
-{
-    std::cout << "Plugin onLoad!" << std::endl;
-}
+void appcom::plugin::onLoad() { std::cout << "Plugin onLoad!" << std::endl; }
 
-void appcom::plugin::onUnload()
-{
-    std::cout << "Plugin onUnload!" << std::endl;
-}
+void appcom::plugin::onUnload() { std::cout << "Plugin onUnload!" << std::endl; }

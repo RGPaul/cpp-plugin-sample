@@ -46,7 +46,7 @@ endif()
 ### link external libraries ###
 
 # Boost - https://www.boost.org
-find_package(Boost COMPONENTS filesystem log system)
+find_package(Boost COMPONENTS filesystem log program_options system)
 
 ### create executable ###
 add_executable(myapp
@@ -62,6 +62,9 @@ link_directories(${Boost_LIBRARY_DIRS})
 if(UNIX AND NOT APPLE)
   target_link_libraries(myapp dl pthread)
 endif()
+
+target_link_libraries(myapp
+                      ${Boost_LIBRARIES})
 
 # installation 
 install(TARGETS myapp
