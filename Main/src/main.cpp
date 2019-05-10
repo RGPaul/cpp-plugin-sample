@@ -22,7 +22,6 @@ std::vector<std::shared_ptr<appcom::Plugin>> plugins;
 boost::program_options::variables_map readArgs(const int argc, const char** argv);
 
 std::shared_ptr<appcom::Plugin> loadPlugin(const std::string& path);
-void unloadPlugin(std::shared_ptr<appcom::Plugin> plugin);
 
 int main(const int argc, const char** argv)
 {
@@ -41,7 +40,7 @@ int main(const int argc, const char** argv)
             std::shared_ptr<appcom::Plugin> plugin = loadPlugin(pluginPath);
             plugins.emplace_back(plugin);
 
-            std::cout << "Plugin name: " << plugin->getName()() << std::endl;
+            std::cout << "Plugin name: " << plugin->getName() << std::endl;
         }
     }
     else
@@ -51,7 +50,6 @@ int main(const int argc, const char** argv)
 
     for (auto it = plugins.begin(); it != plugins.end();)
     {
-        unloadPlugin(*it);
         it = plugins.erase(it);
     }
 
@@ -88,15 +86,7 @@ std::shared_ptr<appcom::Plugin> loadPlugin(const std::string& path)
 {
     std::shared_ptr<appcom::Plugin> plugin = std::make_shared<appcom::Plugin>(path);
 
-    plugin->onLoad()();
+    plugin->onLoad();
 
     return plugin;
-}
-
-void unloadPlugin(std::shared_ptr<appcom::Plugin> plugin)
-{
-    if (plugin)
-    {
-        plugin->onUnload()();
-    }
 }

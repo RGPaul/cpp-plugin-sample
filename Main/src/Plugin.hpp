@@ -20,7 +20,7 @@ namespace appcom
 class Plugin
 {
   private:
-    typedef const char *(*getNameType)();
+    typedef const char* (*getNameType)();
     typedef void (*onLoadType)();
     typedef void (*onUnloadType)();
 
@@ -29,22 +29,23 @@ class Plugin
     ~Plugin();
 
     // accessors
-    getNameType getName() const;
-    onLoadType onLoad() const;
-    onUnloadType onUnload() const;
+    const char* getName() const;
+
+    // methods
+    void onLoad() const;
 
   private:
     Plugin() = delete;
-    Plugin(const Plugin &other) = delete;
+    Plugin(const Plugin& other) = delete;
 
-    getNameType _getName;
-    onLoadType _onLoad;
-    onUnloadType _onUnload;
+    getNameType _getName {nullptr};
+    onLoadType _onLoad {nullptr};
+    onUnloadType _onUnload {nullptr};
 
 #if defined(_WIN32)
     HINSTANCE _lib;
 #else  // defined(_WIN32)
-    void *_lib;
+    void* _lib;
 #endif
 };
 }  // namespace appcom

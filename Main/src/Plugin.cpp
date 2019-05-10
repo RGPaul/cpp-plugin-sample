@@ -57,6 +57,9 @@ appcom::Plugin::Plugin(std::string fileName)
 
 appcom::Plugin::~Plugin()
 {
+    if (_onUnload)
+        _onUnload();
+
 #if defined(_WIN32)
 
     if (_lib)
@@ -71,6 +74,7 @@ appcom::Plugin::~Plugin()
 }
 
 // accessors
-appcom::Plugin::getNameType appcom::Plugin::getName() const { return _getName; }
-appcom::Plugin::onLoadType appcom::Plugin::onLoad() const { return _onLoad; }
-appcom::Plugin::onUnloadType appcom::Plugin::onUnload() const { return _onUnload; }
+const char*  appcom::Plugin::getName() const { return _getName(); }
+
+// methods
+void appcom::Plugin::onLoad() const { _onLoad(); }
